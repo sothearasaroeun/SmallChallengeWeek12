@@ -43,10 +43,25 @@ class _NewItemState extends State<NewItem> {
 
   void onReset() {
     // Will be implemented later - Reset all fields to the initial values
+    setState(() {
+      _nameController.text = defautName;
+      _quantityController.text = defaultQuantity.toString();
+      _selectedCategory = defaultCategory;
+    });
   }
 
   void onAdd() {
     // Will be implemented later - Create and return the new grocery
+    final name = _nameController.text;
+    final qty = int.tryParse(_quantityController.text)!;
+    final newGrocery = Grocery(
+      id: DateTime.now().toString(), 
+      name: name, 
+      quantity: qty, 
+      category: _selectedCategory,
+      );
+
+      Navigator.pop<Grocery>(context, newGrocery);
   }
 
   @override
